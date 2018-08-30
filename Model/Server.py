@@ -24,5 +24,5 @@ class User(Base):
     email = Column(Text, nullable=False)
 
 
-engine = create_engine('mysql+pymysql://root:root@localhost:3289/automation')
+engine = create_engine('mysql+pymysql://root:root@localhost:3306/automation')
 Base.metadata.create_all(engine)
