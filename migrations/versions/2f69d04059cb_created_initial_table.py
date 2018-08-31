@@ -47,10 +47,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
-    op.drop_index('email', table_name='User')
-    op.drop_table('User')
-    op.drop_table('Roles')
-    op.drop_table('Instances')
+    # op.drop_index('email', table_name='User')
+    # op.drop_table('User')
+    # op.drop_table('Roles')
+    # op.drop_table('Instances')
     # ### end Alembic commands ###
 
 

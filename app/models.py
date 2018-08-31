@@ -1,5 +1,5 @@
 from flask_dance.consumer.backend.sqla import OAuthConsumerMixin, SQLAlchemyBackend
-from flask_login import current_user
+from flask_login import UserMixin
 import sqlalchemy_utils
 from app import db, blueprint
 from datetime import datetime
@@ -17,7 +17,7 @@ class Instances(db.Model):
     sshPass = db.Column(db.String(100), nullable=False)
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     """ This Class Store the Detail of the User"""
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     role = db.Column(db.String(100), nullable=True)
@@ -37,8 +37,9 @@ class OAuth(db.Model,OAuthConsumerMixin):
 class Roles(db.Model):
     """ This Class Store the Role of the User"""
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    user = db.relationship(User)
     role = db.Column(db.String(100), nullable=True)
-    capabilities = db.Column(db.String(200), nullable=True)
 
 
 # storage = SQLAlchemyBackend(OAuth, db.session, user=current_user)

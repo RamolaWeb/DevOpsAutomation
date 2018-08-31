@@ -2,6 +2,7 @@ from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 from flask_dance.contrib.google import make_google_blueprint
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -11,6 +12,7 @@ app.config.from_object(Config)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+login = LoginManager(app)
 
 blueprint = make_google_blueprint(
     client_id="423174373080-9l7f3n6pc98uqcs0vr6ggautos2eoitd.apps.googleusercontent.com",
